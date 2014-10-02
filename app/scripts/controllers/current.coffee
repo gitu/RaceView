@@ -7,16 +7,18 @@
  # # CurrentCtrl
  # Controller of the raceViewApp
 ###
-angular.module('raceViewApp')
-  .controller 'CurrentCtrl', ($scope,fbutil) ->
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate'
-      'AngularJS'
-      'Karma'
-    ]
-    $scope.lastRace = '##';
-    Console.log('hello');
+angular.module('raceViewApp').controller 'CurrentCtrl', ($scope, $timeout, FBURL, $firebase) ->
+  alert = (msg) ->
+    $scope.err = msg
+    $timeout (->
+      $scope.err = null
+    ), 5000
 
-    fbutil.syncData('lastRace').$bind($scope, 'lastRace');
+  ref = new Firebase(FBURL).child('lastRace');
+  $scope.lastRace = $firebase(ref).$asObject();
+  console.log($scope.lastRace);
+
+
+
 
 
