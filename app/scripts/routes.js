@@ -81,6 +81,11 @@ angular.module('raceViewApp')
         templateUrl: 'views/chat.html',
         controller: 'ChatCtrl'
       })
+
+      .when('/current', {
+        templateUrl: 'views/current.html',
+        controller: 'CurrentCtrl'
+      })
       .otherwise({redirectTo: '/'});
   }])
 
