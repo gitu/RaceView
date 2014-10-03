@@ -1,4 +1,20 @@
-<pre>{{ lastRace.$value }}</pre>
+<div>
+    <table>
+        <tr>
+            <th ng-repeat="i in [1,2,3,4,5,6,7,8]" ng-show="race.car[i]">
+                Car {{i}} - fastest: {{race.car[i].fastest/1000}}s
+            </th>
+        </tr>
+        <tr>
+            <td ng-repeat="i in [1,2,3,4,5,6,7,8]" ng-show="race.car[i]">
+                <div ng-repeat="round in race.car[i].round | reverse" ng-show="round">
+                    {{$index}} - {{round/1000}}s
+                    <br/>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
 
-
+<pre>{{ race | json}}</pre>
 <p class="alert alert-danger" ng-show="err">{{err}}</p>
