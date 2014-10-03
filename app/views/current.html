@@ -1,20 +1,58 @@
-<div>
-    <table>
-        <tr>
-            <th ng-repeat="i in [1,2,3,4,5,6,7,8]" ng-show="race.car[i]">
-                Car {{i}} - fastest: {{race.car[i].fastest/1000}}s
-            </th>
-        </tr>
-        <tr>
-            <td ng-repeat="i in [1,2,3,4,5,6,7,8]" ng-show="race.car[i]">
-                <div ng-repeat="round in race.car[i].round | reverse" ng-show="round">
-                    {{$index}} - {{round/1000}}s
-                    <br/>
-                </div>
-            </td>
-        </tr>
-    </table>
+<div class="alert-info" ng-show="trackState.startLamp == 1">
+    <h1>GET READY</h1>
 </div>
 
-<pre>{{ race | json}}</pre>
+<div class="alert-info" ng-show="trackState.startLamp > 1 && trackState.startLamp <= 6">
+    <h1>{{6-trackState.startLamp}}</h1>
+</div>
+
+
+<div class="row">
+
+    <div class="col-md-6">
+        Race
+        <table class="table table-striped">
+            <tr>
+                <th>Round</th>
+                <th ng-repeat="car in [1,2]">
+                    Car {{car}}
+                </th>
+            </tr>
+            <tr ng-repeat="round in race.race.rounds | reverse" ng-animate="'animate'">
+                <th>{{race.race.rounds.length - $index}}</th>
+                <td ng-repeat="car in [1,2]" ng-animate="'animate'">
+                    <div ng-show="round.cars[car]" ng-animate="'animate'">
+                        {{round.cars[car]/1000}}s
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="col-md-6">
+        Qualifying
+        <table class="table table-striped">
+            <tr>
+                <th>Round</th>
+                <th ng-repeat="car in [1,2]">
+                    Car {{car}}
+                </th>
+            </tr>
+            <tr ng-repeat="round in qualifying.qualifying.rounds | reverse | limitTo: 10"  ng-animate="'animate'">
+                <th>{{qualifying.qualifying.rounds.length - $index}}</th>
+                <td ng-repeat="car in [1,2]"  ng-animate="'animate'">
+                    <div ng-show="round.cars[car]" ng-animate="'animate'">
+                        {{round.cars[car]/1000}}s
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    </div>
+</div>
+
 <p class="alert alert-danger" ng-show="err">{{err}}</p>
+
+<pre>{{ trackState | json}}</pre>
+<pre>{{ race | json}}</pre>
+<pre>{{ qualifying | json}}</pre>
