@@ -1,6 +1,6 @@
 dependencies:
   pre:
-    - npm install --global optipng-bin
+    - npm install --global optipng-bin firebase-tools
     - gem install compass
 test:
   pre:
