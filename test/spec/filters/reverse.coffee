@@ -10,6 +10,6 @@ describe 'Filter: reverse', ->
   beforeEach inject ($filter) ->
     reverse = $filter 'reverse'
 
-  it 'should return the input prefixed with "reverse filter:"', ->
+  it 'should return the input in reverse order', ->
     text = ['A','B']
     expect(reverse text).toEqual(['B','A'])
