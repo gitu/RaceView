@@ -2,6 +2,7 @@ dependencies:
   pre:
     - npm install --global optipng-bin firebase-tools
     - gem install compass
+    - npm install
 test:
   pre:
     - bower install
