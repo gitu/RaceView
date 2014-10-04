@@ -6,4 +6,15 @@ test:
   pre:
     - bower install
   override:
+    - grunt test
+  post:
     - grunt build
+
+deployment:
+  master:
+    branch: master
+    commands:
+      - firebase -s deploy
+
+
+
