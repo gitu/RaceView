@@ -3,12 +3,10 @@ dependencies:
     - npm install --global optipng-bin firebase-tools
     - gem install compass
     - npm install
-test:
-  pre:
     - bower install
+test:k
   override:
     - grunt test
-  post:
     - grunt build
 
 deployment:
