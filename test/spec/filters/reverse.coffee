@@ -11,5 +11,5 @@ describe 'Filter: reverse', ->
     reverse = $filter 'reverse'
 
   it 'should return the input prefixed with "reverse filter:"', ->
-    text = 'angularjs'
-    expect(reverse text).toBe ('reverse filter: ' + text)
+    text = ['A','B']
+    expect(reverse text).toEqual(['B','A'])
