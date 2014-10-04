@@ -4,7 +4,7 @@ dependencies:
     - gem install compass
     - npm install
     - bower install
-test:k
+test:
   override:
     - grunt test
     - grunt build
