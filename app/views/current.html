@@ -1,3 +1,11 @@
+<div class="page-header" id="banner">
+    <div class="row">
+        <div class="col-lg-8 col-md-7 col-sm-6">
+            <h1>Current Race</h1>
+        </div>
+    </div>
+</div>
+
 <div class="alert-info" ng-show="trackState.startLamp == 1">
     <h1>GET READY</h1>
 </div>
@@ -38,7 +46,7 @@
                     Car {{car}}
                 </th>
             </tr>
-            <tr ng-repeat="round in qualifying.qualifying.rounds | reverse | limitTo: 10"  ng-animate="'animate'">
+            <tr ng-repeat="round in qualifying.qualifying.rounds | reverse | limitTo: 20"  ng-animate="'animate'">
                 <th>{{qualifying.qualifying.rounds.length - $index}}</th>
                 <td ng-repeat="car in [1,2]"  ng-animate="'animate'">
                     <div ng-show="round.cars[car]" ng-animate="'animate'">
@@ -53,6 +61,3 @@
 
 <p class="alert alert-danger" ng-show="err">{{err}}</p>
 
-<pre>{{ trackState | json}}</pre>
-<pre>{{ race | json}}</pre>
-<pre>{{ qualifying | json}}</pre>
