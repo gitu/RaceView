@@ -104,6 +104,9 @@ angular.module("raceViewApp").config([
       templateUrl: 'views/current.html'
       controller: 'CurrentCtrl'
 
+    .when '/about',
+      templateUrl: 'views/about.html'
+      controller: 'AboutCtrl'
     .otherwise redirectTo: "/"
 
 ]).run([
