@@ -1,0 +1,12 @@
+<md-dialog aria-label="Change Email">
+    <div class="dialog-content">
+        <form>
+            <md-text-float label="New Email" ng-keypress="clear()" ng-model="newEmail"></md-text-float>
+            <md-text-float label="Password" type="password" ng-keypress="clear()" ng-model="pass"></md-text-float>
+
+            <md-button class="md-button-raised" ng-click="changeEmail(pass, newEmail)">update email</md-button>
+
+            <div ng-repeat="message in messages" class="alert alert-{{message.type}}">{{message.text}}</div>
+        </form>
+    </div>
+</md-dialog>

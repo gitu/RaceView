@@ -1,0 +1,18 @@
+<md-dialog aria-label="Change Password">
+    <div class="dialog-content">
+        <form role="form">
+
+            <md-text-float label="Old Password" type="password" ng-keypress="clear()"
+                           ng-model="oldpass"></md-text-float>
+            <md-text-float label="New Password" type="password" ng-keypress="clear()"
+                           ng-model="newpass"></md-text-float>
+            <md-text-float label="Confirm New Password" type="password" ng-keypress="clear()"
+                           ng-model="confirm"></md-text-float>
+
+            <md-button class="md-button-raised" ng-click="changePassword(oldpass, newpass, confirm)">change password
+            </md-button>
+
+            <div ng-repeat="message in messages" class="alert alert-{{message.type}}">{{message.text}}</div>
+        </form>
+    </div>
+</md-dialog>

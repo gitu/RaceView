@@ -1,63 +1,92 @@
 <!doctype html>
-<html ng-app="raceViewApp" class="no-js">
+<html ng-app="raceViewApp" ng-controller="AppCtrl">
 <head>
     <meta charset="utf-8">
-    <title>RaceView</title>
+    <title ng-bind="(menu.currentSection.name || 'Confinale Race View') + (menu.currentPage ? (' > ' + (menu.currentPage | humanizeDoc)) : '')">
+        Confinale Race View</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css"/>
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css"/>
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
 </head>
-<body>
-<!--[if lt IE 7]>
-<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
-    your browser</a> to improve your experience.</p>
-<![endif]-->
+<body layout="horizontal">
 
+<md-sidenav layout="vertical"
+            class="md-sidenav-left md-whiteframe-z2"
+            component-id="left"
+            is-locked-open="$media('md')">
 
-<div class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <a href="#/" class="navbar-brand">Home</a>
+    <md-toolbar class="md-theme-light md-medium-tall">
+        <h1 class="md-toolbar-tools" style="padding-top:25px;">
+            <a href="#/" ng-click="goHome()">Confinale<br/>Race View</a>
+        </h1>
+    </md-toolbar>
+
+    <md-content flex>
+        <div ng-repeat="section in menu.sections">
+
+            <button class="menu-item menu-title"
+                    ng-class="{active: menu.isSectionSelected(section)}"
+                    ng-click="menu.toggleSelectSection(section)"
+                    ink-ripple>
+                {{section.name}}
+            </button>
+
+            <a class="menu-item menu-sub-item"
+               ng-show="menu.showPage(section, page)"
+               ng-repeat="page in section.pages"
+               ng-class="{active: menu.isPageSelected(section, page)}"
+               ng-href="#{{page.url}}"
+               ink-ripple>
+                <span ng-bind="page | humanizeDoc"></span>
+            </a>
+
         </div>
-        <div class="navbar-collapse collapse" id="navbar-main">
-            <ul class="nav navbar-nav">
-                <li><a ng-href="#/current">Current Race</a></li>
-            </ul>
+    </md-content>
 
-            <ul class="nav navbar-nav navbar-right">
-                <li><a ng-href="#/about">About</a></li>
-                <li>
-                    <a ng-hide-auth="" href="#/login">Log In</a>
-                    <a ng-show-auth="" href="#/account">Account</a>
-                </li>
-            </ul>
+</md-sidenav>
 
-        </div>
-    </div>
-</div>
+<div layout="vertical" layout-fill tabIndex="-1" role="main">
+    <md-toolbar class="md-theme-dark md-medium-tall app-toolbar">
 
+        <div class="md-toolbar-tools" ng-click="openMenu()">
+            <button class="menu-icon" hide-md aria-label="Toggle Menu">
+                <md-icon icon="images/ic_menu_24px.svg">
+                </md-icon>
+            </button>
+            <p hide show-sm ng-if="menu.currentSection.name">
+                {{menu.currentSection.name}}
+            </p>
+            <span layout="vertical" layout-align="center center" class="menu-separator-icon"
+                  ng-if="menu.currentPage">
+              <img style="height: 16px;" src="images/docArrow.png" alt="" aria-hidden="true" hide block-sm>
+            </span>
 
-<div class="container">
-
-    <div ng-view=""></div>
-
-    <footer>
-        <div class="row">
-            <div class="col-lg-12">
-
-                <p>by <a href="http://www.confinale.ch" rel="nofollow">Confinale AG</a>. </p>
-
-            </div>
+            <h2 ng-bind="(menu.currentPage | humanizeDoc) || 'Confinale Race View'" flex></h2>
         </div>
 
-    </footer>
+        <div class="md-toolbar-tools api-options-bar"
+             ng-if="path().indexOf('demo') > -1">
+            <span flex></span>
+            <md-button ng-repeat="doc in currentComponent.docs"
+                       ng-href="#{{doc.url}}">
+                <span ng-bind="doc | humanizeDoc | directiveBrackets"></span>
+            </md-button>
+        </div>
+
+    </md-toolbar>
+
+    <md-content ng-view scroll-y flex class="md-content-padding"></md-content>
 
 </div>
 
@@ -93,29 +122,18 @@
 <script src="bower_components/jquery/dist/jquery.js"></script>
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/json3/lib/json3.js"></script>
-<script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/affix.js"></script>
-<script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/alert.js"></script>
-<script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/button.js"></script>
-<script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/carousel.js"></script>
-<script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/collapse.js"></script>
-<script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/dropdown.js"></script>
-<script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tab.js"></script>
-<script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/transition.js"></script>
-<script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/scrollspy.js"></script>
-<script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/modal.js"></script>
-<script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tooltip.js"></script>
-<script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/popover.js"></script>
-<script src="bower_components/angular-resource/angular-resource.js"></script>
-<script src="bower_components/angular-cookies/angular-cookies.js"></script>
-<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-<script src="bower_components/angular-animate/angular-animate.js"></script>
-<script src="bower_components/angular-touch/angular-touch.js"></script>
 <script src="bower_components/angular-route/angular-route.js"></script>
 <script src="bower_components/firebase/firebase.js"></script>
 <script src="bower_components/firebase-simple-login/firebase-simple-login.js"></script>
 <script src="bower_components/mockfirebase/dist/mockfirebase.js"></script>
 <script src="bower_components/angularfire/dist/angularfire.min.js"></script>
-<script src="bower_components/fireuser/FireUser.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="bower_components/fastclick/lib/fastclick.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-aria/angular-aria.js"></script>
+<script src="bower_components/hammerjs/hammer.js"></script>
+<script src="bower_components/angular-material/angular-material.js"></script>
+<script src="bower_components/angularytics/dist/angularytics.min.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 
@@ -132,6 +150,13 @@
 <script src="scripts/directives/ngShowAuth.js"></script>
 <script src="scripts/directives/ngHideAuth.js"></script>
 <script src="scripts/routes.js"></script>
+<script src="scripts/controllers/left.js"></script>
+<script src="scripts/controllers/toast.js"></script>
+<script src="scripts/directives/ig.js"></script>
+<script src="scripts/controllers/app.js"></script>
+<script src="scripts/services/menu.js"></script>
+<script src="scripts/filters/humanizedoc.js"></script>
+<script src="scripts/filters/directivebrackets.js"></script>
 <!-- endbuild -->
 </body>
 </html>

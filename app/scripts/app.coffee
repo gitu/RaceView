@@ -9,14 +9,20 @@
  # Main module of the application.
 ###
 angular
-  .module('raceViewApp', [
-    'ngAnimate',
-    'ngCookies',
-    'ngResource',
+.module('raceViewApp', [
+    'ngMaterial',
     'ngRoute',
-    'ngSanitize',
-    'ngTouch',
     'firebase',
     'firebase.utils',
-    'simpleLogin'
+    'simpleLogin',
+    'angularytics'
   ])
+.run ->
+  FastClick.attach document.body
+
+.config (AngularyticsProvider) ->
+  AngularyticsProvider.setEventHandlers(['Console', 'GoogleUniversal']);
+###
+.run(Angularytics) ->
+  Angularytics.init()
+###

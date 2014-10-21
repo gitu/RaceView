@@ -1,0 +1,26 @@
+{
+    "rules": {
+        "lastQualifying": {
+            ".read": true,
+            ".write": false
+        },
+        "lastRace": {
+            ".read": true,
+            ".write": false
+        },
+        "races": {
+            ".read": true,
+            ".write": false
+        },
+        "trackState": {
+            ".read": true,
+            ".write": false
+        },
+        "users": {
+            "$user_id": {
+                ".read": "$user_id === auth.uid",
+                ".write": "$user_id === auth.uid"
+            }
+        }
+    }
+}

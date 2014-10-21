@@ -75,7 +75,6 @@ angular.module("raceViewApp").config([
 ]).config([
   "$routeProvider"
   ($routeProvider) ->
-
     $routeProvider.when("/",
       templateUrl: "views/main.html"
       controller: "MainCtrl"
@@ -86,19 +85,10 @@ angular.module("raceViewApp").config([
       controller: "LoginCtrl"
     )
 
-    .when("/chat",
-      templateUrl: "views/chat.html"
-      controller: "ChatCtrl"
-    )
-
     .whenAuthenticated("/account",
       templateUrl: "views/account.html"
       controller: "AccountCtrl"
     )
-
-    .when '/chat',
-      templateUrl: 'views/chat.html'
-      controller: 'ChatCtrl'
 
     .when '/current',
       templateUrl: 'views/current.html'

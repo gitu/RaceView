@@ -1,9 +1,10 @@
 {
-  "firebase": "racebase",
-  "public": "dist",
-  "ignore": [
-    "firebase.json",
-    "**/.*",
-    "**/node_modules/**"
-  ]
+    "firebase": "racebase",
+    "public": "dist",
+    "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+    ],
+    "rules": "config/security-rules.json"
 }
