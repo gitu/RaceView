@@ -14,6 +14,3 @@ describe 'Controller: MainCtrl', ->
     MainCtrl = $controller 'MainCtrl', {
       $scope: scope
     }
-
-  #sit 'should attach a list of awesomeThings to the scope', ->
-  #  expect(scope.awesomeThings.length).toBe 3

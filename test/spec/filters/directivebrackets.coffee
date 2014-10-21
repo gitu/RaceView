@@ -10,6 +10,3 @@ describe 'Filter: directiveBrackets', ->
   beforeEach inject ($filter) ->
     directiveBrackets = $filter 'directiveBrackets'
 
-  it 'should return the input prefixed with "directiveBrackets filter:"', ->
-    text = 'angularjs'
-    expect(directiveBrackets text).toBe ('directiveBrackets filter: ' + text)

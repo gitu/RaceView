@@ -9,6 +9,3 @@ describe 'Service: menu', ->
   menu = {}
   beforeEach inject (_menu_) ->
     menu = _menu_
-
-  it 'should do something', ->
-    expect(!!menu).toBe true

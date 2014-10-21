@@ -10,6 +10,3 @@ describe 'Filter: humanizeDoc', ->
   beforeEach inject ($filter) ->
     humanizeDoc = $filter 'humanizeDoc'
 
-  it 'should return the input prefixed with "humanizeDoc filter:"', ->
-    text = 'angularjs'
-    expect(humanizeDoc text).toBe ('humanizeDoc filter: ' + text)

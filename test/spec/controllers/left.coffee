@@ -11,9 +11,7 @@ describe 'Controller: LeftctrlCtrl', ->
   # Initialize the controller and a mock scope
   beforeEach inject ($controller, $rootScope) ->
     scope = $rootScope.$new()
-    LeftctrlCtrl = $controller 'LeftctrlCtrl', {
+    LeftctrlCtrl = $controller 'LeftCtrl', {
       $scope: scope
     }
 
-  it 'should attach a list of awesomeThings to the scope', ->
-    expect(scope.awesomeThings.length).toBe 3
