@@ -17,6 +17,7 @@ module.exports = (config) ->
       'bower_components/json3/lib/json3.min.js'
       'bower_components/jquery/dist/jquery.js'
       'bower_components/angular/angular.js'
+      'bower_components/angular-mocks/angular-mocks.js'
       'bower_components/json3/lib/json3.js'
       'bower_components/angular-route/angular-route.js'
       'bower_components/firebase/firebase.js'
@@ -30,6 +31,7 @@ module.exports = (config) ->
       'bower_components/hammerjs/hammer.js'
       'bower_components/angular-material/angular-material.js'
       'bower_components/angularytics/dist/angularytics.min.js'
+
       'app/scripts/**/*.coffee'
       'app/scripts/angularfire/*.js'
       'app/scripts/directives/ngHideAuth.js'
