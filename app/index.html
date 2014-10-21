@@ -77,8 +77,8 @@
             <span flex></span>
 
             <div ng-if="!!currentUser.pictureUrl" style="background-image: url('{{currentUser.pictureUrl}}')"
-                 class="face" ng-ref="#/account"></div>
-            <a ng-if="!!currentUser" ng-href="#/account">{{currentUser.displayName}}</a>
+                 ng-class="{face:!!currentUser.pictureUrl}" ng-href="#/account"></div>
+            <a ng-if="!!currentUser" ng-href="#/account" ng-bind="currentUser.displayName"></a>
             <a ng-if="!currentUser" ng-href="#/login">Login / Register</a>
         </div>
 
