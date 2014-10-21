@@ -76,7 +76,7 @@
         <div class="md-toolbar-tools api-options-bar">
             <span flex></span>
 
-            <div ng-if="!!currentUser.pictureUrl" style="background-image: url('{{currentUser.pictureUrl}}')"
+            <div ng-if="!!currentUser.pictureUrl" ng-style="{'background-image': 'url(\''+currentUser.pictureUrl+'\')'}"
                  ng-class="{face:!!currentUser.pictureUrl}" ng-href="#/account"></div>
             <a ng-if="!!currentUser" ng-href="#/account" ng-bind="currentUser.displayName"></a>
             <a ng-if="!currentUser" ng-href="#/login">Login / Register</a>
