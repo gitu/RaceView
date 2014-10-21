@@ -1,63 +1,57 @@
-<div class="page-header" id="banner">
-    <div class="row">
-        <div class="col-lg-8 col-md-7 col-sm-6">
-            <h1>Current Race</h1>
+<md-content>
+    <div layout="horizontal">
+
+        <div class="alert-info" ng-show="trackState.startLamp == 1">
+            <h1>GET READY</h1>
+        </div>
+
+        <div class="alert-info" ng-show="trackState.startLamp > 1 && trackState.startLamp <= 6">
+            <h1>{{6-trackState.startLamp}}</h1>
         </div>
     </div>
-</div>
-
-<div class="alert-info" ng-show="trackState.startLamp == 1">
-    <h1>GET READY</h1>
-</div>
-
-<div class="alert-info" ng-show="trackState.startLamp > 1 && trackState.startLamp <= 6">
-    <h1>{{6-trackState.startLamp}}</h1>
-</div>
 
 
-<div class="row">
+    <div layout="vertical" layout-sm="horizontal" layout-padding>
+        <div flex>
+            Race
+            <table class="table table-striped">
+                <tr>
+                    <th>Round</th>
+                    <th ng-repeat="car in race.cars">
+                        Car {{$index+1}}
+                    </th>
+                </tr>
+                <tr ng-repeat="round in race.race.rounds | reverse" ng-animate="'animate'">
+                    <th>{{race.race.rounds.length - $index}}</th>
+                    <td ng-repeat="car in qualifying.cars" ng-animate="'animate'">
+                        <div ng-show="round.cars[$index]" ng-animate="'animate'">
+                            {{round.cars[$index]/1000}}s
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
 
-    <div class="col-md-6">
-        Race
-        <table class="table table-striped">
-            <tr>
-                <th>Round</th>
-                <th ng-repeat="car in [1,2]">
-                    Car {{car}}
-                </th>
-            </tr>
-            <tr ng-repeat="round in race.race.rounds | reverse" ng-animate="'animate'">
-                <th>{{race.race.rounds.length - $index}}</th>
-                <td ng-repeat="car in [1,2]" ng-animate="'animate'">
-                    <div ng-show="round.cars[car]" ng-animate="'animate'">
-                        {{round.cars[car]/1000}}s
-                    </div>
-                </td>
-            </tr>
-        </table>
+        <div flex>
+            Qualifying
+            <table class="table table-striped table-responsive">
+                <tr>
+                    <th>Round</th>
+                    <th ng-repeat="car in qualifying.cars">
+                        Car {{$index+1}}
+                    </th>
+                </tr>
+                <tr ng-repeat="round in qualifying.qualifying.rounds | reverse | limitTo: 20" ng-animate="'animate'">
+                    <th>{{qualifying.qualifying.rounds.length - $index}}</th>
+                    <td ng-repeat="car in qualifying.cars" ng-animate="'animate'">
+                        <div ng-show="round.cars[$index]" ng-animate="'animate'">
+                            {{round.cars[$index]/1000}}s
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
+    <p class="alert alert-danger" ng-show="err">{{err}}</p>
 
-    <div class="col-md-6">
-        Qualifying
-        <table class="table table-striped">
-            <tr>
-                <th>Round</th>
-                <th ng-repeat="car in [1,2]">
-                    Car {{car}}
-                </th>
-            </tr>
-            <tr ng-repeat="round in qualifying.qualifying.rounds | reverse | limitTo: 20"  ng-animate="'animate'">
-                <th>{{qualifying.qualifying.rounds.length - $index}}</th>
-                <td ng-repeat="car in [1,2]"  ng-animate="'animate'">
-                    <div ng-show="round.cars[car]" ng-animate="'animate'">
-                        {{round.cars[car]/1000}}s
-                    </div>
-                </td>
-            </tr>
-        </table>
-    </div>
-    </div>
-</div>
-
-<p class="alert alert-danger" ng-show="err">{{err}}</p>
-
+</md-content>

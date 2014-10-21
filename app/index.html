@@ -61,27 +61,25 @@
 
         <div class="md-toolbar-tools" ng-click="openMenu()">
             <button class="menu-icon" hide-md aria-label="Toggle Menu">
-                <md-icon icon="images/ic_menu_24px.svg">
-                </md-icon>
+                <img src="images/ic_menu_24px.png"/>
             </button>
             <p hide show-sm ng-if="menu.currentSection.name">
                 {{menu.currentSection.name}}
             </p>
-            <span layout="vertical" layout-align="center center" class="menu-separator-icon"
-                  ng-if="menu.currentPage">
+            <span layout="vertical" layout-align="center center" class="menu-separator-icon" ng-if="menu.currentPage">
               <img style="height: 16px;" src="images/docArrow.png" alt="" aria-hidden="true" hide block-sm>
             </span>
 
             <h2 ng-bind="(menu.currentPage | humanizeDoc) || 'Confinale Race View'" flex></h2>
         </div>
 
-        <div class="md-toolbar-tools api-options-bar"
-             ng-if="path().indexOf('demo') > -1">
+        <div class="md-toolbar-tools api-options-bar">
             <span flex></span>
-            <md-button ng-repeat="doc in currentComponent.docs"
-                       ng-href="#{{doc.url}}">
-                <span ng-bind="doc | humanizeDoc | directiveBrackets"></span>
-            </md-button>
+
+            <div ng-if="!!currentUser.pictureUrl" style="background-image: url('{{currentUser.pictureUrl}}')"
+                 class="face" ng-ref="#/account"></div>
+            <a ng-if="!!currentUser" ng-href="#/account">{{currentUser.displayName}}</a>
+            <a ng-if="!currentUser" ng-href="#/login">Login / Register</a>
         </div>
 
     </md-toolbar>

@@ -351,3 +351,14 @@ pre > code.highlight {
   -ms-user-select: initial;
   user-select: initial;
 }
+
+.api-options-bar .face {
+  -moz-border-radius: 30px/30px;
+  -webkit-border-radius: 30px 30px;
+  border-radius: 30px/30px;
+  border: 1px solid #ddd;
+  height: 30px;
+  width: 30px;
+  background-position: center;
+  background-size: cover;
+}

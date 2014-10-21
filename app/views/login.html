@@ -10,7 +10,7 @@
 
         <p>
             <md-button class="md-button-raised md-button-colored" ng-click="passwordLogin(email, pass)"
-                       ng-disabled="!!email && !!pass" ng-hide="createMode">Log In
+                       ng-disabled="!(!!email && !!pass)" ng-hide="createMode">Log In
             </md-button>
             <md-button class="md-button-raised" ng-click="createMode = true" ng-hide="createMode">Register</md-button>
             <md-button class="md-button-raised md-button-colored" ng-cloak ng-show="createMode"
@@ -20,10 +20,14 @@
             </md-button>
         </p>
     </form>
-
-    <md-button class="md-button-raised" ng-click="oauthlogin('facebook')">Facebook</md-button>
-    <md-button class="md-button-raised" ng-click="oauthlogin('google')">Google</md-button>
-    <md-button class="md-button-raised" ng-click="oauthlogin('github')">GitHub</md-button>
+    <md-divider></md-divider>
+    <h3 class="layout-title">Login with:</h3>
+    <md-button class="md-button-raised" ng-click="oauthlogin('facebook')"><i class="fa fa-facebook-square"></i> Facebook
+    </md-button>
+    &nbsp;
+    <md-button class="md-button-raised" ng-click="oauthlogin('google')"><i class="fa fa-google"></i> Google</md-button>
+    &nbsp;
+    <md-button class="md-button-raised" ng-click="oauthlogin('github')"><i class="fa fa-github"></i> GitHub</md-button>
 
     <p ng-show="err" class="bg-danger">{{err}}</p>
 </md-content>
