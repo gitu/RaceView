@@ -51,7 +51,7 @@ angular.module("raceViewApp").controller "AppCtrl", ($scope, $mdSidenav, $timeou
       displayName: user.displayName
       provider: user.provider
       provider_id: user.id
-      pictureUrl: profileUrl
+      pictureUrl: pictureUrl
       thirdPartyUserData: user.thirdPartyUserData
     })
 
