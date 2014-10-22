@@ -35,6 +35,7 @@ module.exports = (config) ->
       'app/scripts/**/*.coffee'
       'app/scripts/angularfire/*.js'
       'app/scripts/directives/ngHideAuth.js'
+      'app/scripts/services/iopctrl.js'
       'app/scripts/directives/ngShowAuth.js'
       'test/mock/**/*.coffee'
       'test/spec/**/*.coffee'

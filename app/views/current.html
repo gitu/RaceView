@@ -10,6 +10,13 @@
         </div>
     </div>
 
+    <div layout="horizontal" layout-padding>
+        <div flex ng-repeat="car in race.cars">
+            Car {{$index+1}}
+            <tank tank-level="trackState['gas'+($index+1)]" tank-width="150"></tank>
+        </div>
+    </div>
+
 
     <div layout="vertical" layout-sm="horizontal" layout-padding>
         <div flex>
