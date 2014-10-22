@@ -10,10 +10,27 @@
         </div>
     </div>
 
-    <div layout="horizontal" layout-padding>
+    <div layout="vertical" layout-sm="horizontal" layout-padding>
         <div flex ng-repeat="car in race.cars">
-            Car {{$index+1}}
-            <tank tank-level="trackState['gas'+($index+1)]" tank-width="150"></tank>
+            <div layout="vertical">
+                <div><h3 class="layout-label">CAR {{$index+1}}</h3></div>
+                <div>
+                    <tank tank-level="trackState['gas'+($index+1)]" tank-width="150"></tank>
+                </div>
+                <div>
+                    <h3 class="layout-title">Fastest Round: </h3>
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Quali</th>
+                            <th>Race</th>
+                        </tr>
+                        <tr>
+                            <td>{{Math.min.apply(Math,round.cars[$index])}}</td>
+                            <td>0</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 

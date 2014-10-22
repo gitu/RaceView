@@ -58,10 +58,10 @@ angular.module('raceViewApp')
     scope.chart
     .append("svg:image")
     .attr("xlink:href", "/images/icon_156.svg")
-    .attr("x", -radius / 8)
+    .attr("x", -radius / 6)
     .attr("y", -radius / 2)
-    .attr("height", radius / 4)
-    .attr("width", radius / 4);
+    .attr("height", radius / 3)
+    .attr("width", radius / 3);
 
 
     # build gauge bg
