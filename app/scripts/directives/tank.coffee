@@ -106,7 +106,7 @@ angular.module('raceViewApp')
         .transition()
         .delay(500)
         .ease('elastic')
-        .duration(3000)
+        .duration(2000)
         .selectAll('.needle')
         .tween('progress', ->
           (percentOfPercent) ->
