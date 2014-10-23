@@ -33,6 +33,7 @@
             </div>
         </div>
     </div>
+    <pre ng-repeat="car in cars">{{car.race | json}}</pre>
 
     <div layout="vertical" layout-sm="horizontal" layout-padding>
         <div flex>
@@ -46,10 +47,10 @@
                 </tr>
                 <tr ng-repeat="(roundId,round) in race.race.rounds | reverse">
                     <td><b>{{race.race.rounds.length - roundId}}</b></td>
-                    <td ng-repeat="car in cars"
-                        ng-class="{fastest:car.race.rounds[race.race.rounds.length - roundId -1].fastest}">
-                        <div ng-show="car.race.rounds[race.race.rounds.length - roundId -1]">
-                            {{car.race.rounds[race.race.rounds.length - roundId -1].time/1000}}s
+                    <td ng-repeat="car in cars">
+                        <div ng-show="car.race.rounds[race.race.rounds.length - roundId -1].time"
+                             ng-class="{fastest:car.race.rounds[race.race.rounds.length - roundId -1].fastest}">
+                        {{car.race.rounds[race.race.rounds.length - roundId -1].time/1000}}s
                         </div>
                     </td>
                 </tr>
@@ -67,10 +68,10 @@
                 </tr>
                 <tr ng-repeat="(roundId,round) in qualifying.qualifying.rounds | reverse">
                     <td><b>{{qualifying.qualifying.rounds.length - roundId}}</b></td>
-                    <td ng-repeat="car in cars"
-                        ng-class="{fastest:car.qualifying.rounds[qualifying.qualifying.rounds.length - roundId -1 ].fastest}">
-                        <div ng-show="car.qualifying.rounds[roundId]">
-                            {{car.qualifying.rounds[qualifying.qualifying.rounds.length - roundId -1 ].time/1000}}s
+                    <td ng-repeat="car in cars">
+                        <div ng-show="car.qualifying.rounds[qualifying.qualifying.rounds.length - roundId -1].time"
+                             ng-class="{fastest:car.qualifying.rounds[qualifying.qualifying.rounds.length - roundId -1].fastest}">
+                        {{car.qualifying.rounds[qualifying.qualifying.rounds.length - roundId -1 ].time/1000}}s
                         </div>
                     </td>
                 </tr>

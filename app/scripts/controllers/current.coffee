@@ -41,14 +41,15 @@ angular.module('raceViewApp').controller 'CurrentCtrl', ($scope, $timeout, fbuti
       fastest: {}
     }
     angular.forEach rounds, (round, index) ->
-      roundData.rounds[index] = {
-        round: index + 1
-        time: round.cars[car]
-        fastest: false
-      }
-      if roundData.fastest.time == undefined || roundData.fastest.time > round.cars[car]
-        roundData.fastest.time = round.cars[car]
-        roundData.fastest.index = index
+      if (!!round.cars[car])
+        roundData.rounds[index] = {
+          round: index + 1
+          time: round.cars[car]
+          fastest: false
+        }
+        if roundData.fastest.time == undefined || roundData.fastest.time > round.cars[car]
+          roundData.fastest.time = round.cars[car]
+          roundData.fastest.index = index
     if roundData.fastest.time != undefined
       roundData.rounds[roundData.fastest.index].fastest = true
     return roundData
@@ -62,11 +63,19 @@ angular.module('raceViewApp').controller 'CurrentCtrl', ($scope, $timeout, fbuti
         carData = $scope.cars[index]
         carData[type] = parseRoundsForCar(race[type].rounds, index)
 
+  getPositions = () ->
+    angular.forEach $scope.cars, (car) ->
+      car.race.totalRounds = car.race.rounds.length
+      totalTime = 0
+      angular.forEach car.race.rounds, (round) ->
+        totalTime += round.time
+      car.race.totalTime = totalTime
 
   $scope.$watch 'race.cars', (value) ->
     if value != undefined
       $timeout (->
         parseRace($scope.race, 'race')
+        getPositions()
       ), 10
 
 
