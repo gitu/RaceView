@@ -13,7 +13,7 @@
     <div layout="vertical" layout-sm="horizontal" layout-padding>
         <div flex ng-repeat="car in cars">
             <div layout="vertical">
-                <div><h3 class="layout-label">car.title</h3></div>
+                <div><h3 class="layout-label">{{car.title}}</h3></div>
                 <div>
                     <tank tank-level="trackState['gas'+(car.nr)]" tank-width="150"></tank>
                 </div>
