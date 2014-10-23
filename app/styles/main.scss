@@ -388,7 +388,8 @@ pre > code.highlight {
 }
 
 .fastest {
-  background-color: #7cff7a;
+  color: #54a549;
+  font-weight: bold;
 }
 
 .rank {
@@ -402,6 +403,14 @@ pre > code.highlight {
 
 .timeBehind {
   color: #99534e;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.timeBefore {
+  color: #4d9944;
   font-size: 24px;
   font-weight: bold;
   text-align: center;
