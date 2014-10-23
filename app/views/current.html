@@ -14,8 +14,18 @@
         <div flex ng-repeat="car in cars">
             <div layout="vertical">
                 <div><h3 class="layout-label">{{car.title}}</h3></div>
-                <div>
-                    <tank tank-width="150" track-state="trackState" car-nr="car.nr"></tank>
+                <div layout="horizontal">
+                    <div flex>
+                        <tank tank-width="150" track-state="trackState" car-nr="car.nr"></tank>
+                    </div>
+                    <div flex>
+                        <div layout="vertical" ng-show="!!car.race.rank">
+                            <div class="rank" flex>{{car.race.rank}}</div>
+                            <div ng-hide="car.race.timeDiff==0" class="timeBehind">{{car.race.timeDiff/1000}}s</div>
+                            <div ng-hide="car.race.roundDiff==0" class="roundsBehind">{{car.race.roundDiff}} rounds
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div>
                     <h3 class="layout-title">Fastest Round: </h3>
@@ -33,7 +43,6 @@
             </div>
         </div>
     </div>
-    <pre ng-repeat="car in cars">{{car.race | json}}</pre>
 
     <div layout="vertical" layout-sm="horizontal" layout-padding>
         <div flex>

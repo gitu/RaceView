@@ -390,3 +390,28 @@ pre > code.highlight {
 .fastest {
   background-color: #7cff7a;
 }
+
+.rank {
+  color: #999999;
+  font-size: 48px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.timeBehind {
+  color: #99534e;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.roundsBehind {
+  color: #99534e;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  vertical-align: middle;
+}
