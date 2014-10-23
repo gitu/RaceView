@@ -10,7 +10,8 @@ angular.module('raceViewApp')
 .directive('tank', ->
   restrict: 'E'
   scope:
-    tankLevel: '='
+    trackState: '='
+    carNr: '='
     tankWidth: '@'
   link: (scope, element, attr) ->
     barWidth = 20
@@ -32,13 +33,6 @@ angular.module('raceViewApp')
     height = width
     radius = width / 2
 
-    console.log({
-      margin: margin
-      width: width
-      height: height
-      radius: radius
-    })
-
     percToDeg = (perc) ->
       perc * 360
 
@@ -55,7 +49,8 @@ angular.module('raceViewApp')
     scope.chart = svg.append('g')
     .attr('transform', "translate(#{(width + margin.left) / 2}, #{(height + margin.top) / 2})")
 
-    scope.chart
+    scope.radius = radius;
+    scope.tankImage = scope.chart
     .append("svg:image")
     .attr("xlink:href", "/images/icon_156.svg")
     .attr("x", -radius / 6)
@@ -85,7 +80,7 @@ angular.module('raceViewApp')
       .attr('d', arc)
 
     class Needle
-
+      perc: 0
       constructor: (@len, @radius) ->
 
       drawOn: (el, perc) ->
@@ -95,22 +90,23 @@ angular.module('raceViewApp')
         .attr('cy', 0)
         .attr('r', @radius)
 
-
         el.append('path')
         .attr('class', 'needle')
         .attr('d', @mkCmd(perc))
 
       animateOn: (el, perc) ->
         self = this
+        oldPerc = this.perc
+        this.perc = perc
         el
         .transition()
-        .delay(500)
+        .delay(50)
         .ease('elastic')
-        .duration(2000)
+        .duration(1000)
         .selectAll('.needle')
         .tween('progress', ->
           (percentOfPercent) ->
-            progress = percentOfPercent * perc
+            progress = (oldPerc + (percentOfPercent * (perc - oldPerc)))
             d3
             .select(this)
             .attr('d', self.mkCmd progress)
@@ -138,6 +134,37 @@ angular.module('raceViewApp')
     return
 
   controller: ($scope) ->
-    $scope.$watch "tankLevel", (newValue) ->
-      $scope.needle.animateOn $scope.chart, newValue / 15
+    $scope.inTanking = false
+
+
+    $scope.tankAnim = ->
+      if ($scope.inTanking)
+        $scope.tankImage
+        .transition()
+        .duration(300)
+        .ease("cubic")
+        .attr("y", -$scope.radius / 1.8)
+        .attr("x", -$scope.radius / 5)
+        .attr("height", $scope.radius / 1.8)
+        .attr("width", $scope.radius / 1.8)
+        .transition()
+        .duration(300)
+        .ease("cubic")
+        .attr("y", -$scope.radius / 2)
+        .attr("x", -$scope.radius / 6)
+        .attr("height", $scope.radius / 3)
+        .attr("width", $scope.radius / 3)
+        .each("end", $scope.tankAnim)
+
+
+    $scope.$watch "trackState.pitLaneBitMask", (newValue) ->
+      if (newValue != undefined && $scope.tankImage != undefined)
+        v1 = newValue >> ($scope.carNr)
+        $scope.inTanking = (v1 & 1) == 1
+        $scope.tankAnim()
+
+
+    $scope.$watch "trackState.gas" + $scope.carNr, (newValue) ->
+      if (newValue != undefined && $scope.needle != undefined)
+        $scope.needle.animateOn $scope.chart, newValue / 15
 )

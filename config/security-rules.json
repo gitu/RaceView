@@ -2,19 +2,19 @@
     "rules": {
         "lastQualifying": {
             ".read": true,
-            ".write": false
+            ".write": "auth.uid === 'simplelogin:5'"
         },
         "lastRace": {
             ".read": true,
-            ".write": false
+            ".write": "auth.uid === 'simplelogin:5'"
         },
         "races": {
             ".read": true,
-            ".write": false
+            ".write": "auth.uid === 'simplelogin:5'"
         },
         "trackState": {
             ".read": true,
-            ".write": false
+            ".write": "auth.uid === 'simplelogin:5'"
         },
         "users": {
             "$user_id": {

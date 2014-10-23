@@ -56,7 +56,6 @@ angular.module('raceViewApp').controller 'CurrentCtrl', ($scope, $timeout, fbuti
 
   parseRace = (race, type) ->
     angular.forEach race.cars, (car, index) ->
-      console.log(car)
       if car.raw != undefined
         if $scope.cars[index] == undefined
           $scope.cars[index] = {title: 'Car ' + index, nr: index}
