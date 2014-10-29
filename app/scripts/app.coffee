@@ -15,7 +15,8 @@ angular
     'firebase',
     'firebase.utils',
     'simpleLogin',
-    'angularytics'
+    'angularytics',
+    'ui.gravatar'
   ])
 .run ->
   FastClick.attach document.body
@@ -23,6 +24,6 @@ angular
 .config (AngularyticsProvider) ->
   AngularyticsProvider.setEventHandlers(['Console', 'GoogleUniversal']);
 ###
-.run(Angularytics) ->
+run(Angularytics) ->
   Angularytics.init()
 ###

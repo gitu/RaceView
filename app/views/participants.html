@@ -1,0 +1,25 @@
+<md-content>
+    <div layout="vertical">
+        <h3 class="layout-title">Current Requests</h3>
+        <table class="table table-hover">
+            <tr ng-repeat="request in raceRequests | orderBy:'timestamp'">
+                <td>
+                    <div ng-style="{'background-image': 'url(\'' + users[request.uid].pictureUrl + '\')' }"
+                         class="profile-pic"></div>
+                </td>
+                <td>{{users[request.uid].displayName}}</td>
+                <td>{{request.timestamp | date:'yyyy-MM-dd HH:mm:ss Z'}}</td>
+                <td>
+                    <md-button class="md-button-raised" ng-click="showAssignCarDialog($event,request)">assign
+                    </md-button>
+                </td>
+                <td>
+                    <md-button ng-click="removeRequest(request)">remove</md-button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <pre>{{cars|json}}</pre>
+    <pre>{{raceRequests|json}}</pre>
+    </div>
+</md-content>

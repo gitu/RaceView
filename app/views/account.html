@@ -1,11 +1,8 @@
 <md-content>
     <h3>Profile</h3>
 
-    <form role="form">
-
-        <md-text-float label="UID" ng-model="user.uid" disabled></md-text-float>
-        <md-text-float label="Name" ng-model="user.name"></md-text-float>
-        <md-text-float label="Email" ng-model="user.email"></md-text-float>
+    <form role="form" ng-show="user.provider==='password'">
+        <md-text-float label="Name" ng-model="profile.name"></md-text-float>
     </form>
 
     <md-button ng-click="logout()" class="md-button-raised">Log Out</md-button>
@@ -13,7 +10,7 @@
     <div ng-show="{{user.provider === 'password'}}">
         <md-divider><br/></md-divider>
         <md-button class="md-button-raised" ng-click="showChangePasswordDialog($event)">Change Password</md-button>
-        <md-button class="md-button-raised" ng-click="showChangeEmailDialog($event)">Change Email</md-button>
         <div ng-show="alert">{{alert}}</div>
     </div>
+
 </md-content>

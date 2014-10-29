@@ -9,8 +9,10 @@
 ###
 angular.module("raceViewApp").factory "menu", ($location, $rootScope, simpleLogin) ->
   isLoggedIn = false;
+  isConfinale = false;
   simpleLogin.watch (user) ->
     isLoggedIn = !!user
+    isConfinale = !!user && user.provider == 'google' && user.thirdPartyUserData.hd == 'confinale.ch'
     return
   sortByName = (a, b) ->
     (if a.name < b.name then -1 else 1)
@@ -43,6 +45,12 @@ angular.module("raceViewApp").factory "menu", ($location, $rootScope, simpleLogi
     {
       name: "Race Manage"
       pages: [
+        {
+          name: "Participants"
+          id: "participants"
+          url: "/participants"
+          show: 'confinaleOnly'
+        }
         {
           name: "Login"
           id: "login"
@@ -83,10 +91,13 @@ angular.module("raceViewApp").factory "menu", ($location, $rootScope, simpleLogi
       self.currentPage is page
 
     showPage: (section, page) ->
-      return self.isSectionSelected(section) if !page.show
-      return false if !self.isSectionSelected(section)
+      return true if !page.show
       return !isLoggedIn if page.show is 'noauth'
       return isLoggedIn if page.show is 'auth'
+      return isConfinale if page.show is 'confinaleOnly'
+
+    goto: (url) ->
+      $location.path(url)
   }
 
   self

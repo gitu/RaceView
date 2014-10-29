@@ -1,3 +1,18 @@
 <md-content>
     <h1>Welcome to Confinale Race View</h1>
+
+    <div layout="vertical" layout-padding>
+        <div>
+            <md-button class="md-button-raised">Go to race overview</md-button>
+        </div>
+        <div>
+            <md-button ng-show-auth class="md-button-raised md-button-colored"
+                       ng-click="requestRaceParticipation(currentUser)" ng-hide="inRaceList(currentUser)">request race
+                participation
+            </md-button>
+            <md-button ng-hide-auth ng-click="menu.goto('/login')" class="md-button-raised md-button-colored">LOGIN
+            </md-button>
+        </div>
+    </div>
+    <pre>{{currentUser|json}}</pre>
 </md-content>

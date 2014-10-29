@@ -16,24 +16,6 @@ angular.module('raceViewApp').controller 'CurrentCtrl', ($scope, $timeout, fbuti
     ), 5000
 
   $scope.cars = {};
-  $scope.lastRace = {};
-  $scope.lastQualifying = {};
-  $scope.race = {};
-  $scope.qualifying = {};
-
-  $scope.trackState = fbutil.syncObject(['trackState']);
-
-  fbutil.syncObject('lastRace').$bindTo($scope, 'lastRace');
-  fbutil.syncObject('lastQualifying').$bindTo($scope, 'lastQualifying');
-
-
-  $scope.$watch 'lastQualifying', (value) ->
-    if value != undefined && value.$value != undefined
-      $scope.qualifying = fbutil.syncObject(['races', value.$value]);
-
-  $scope.$watch 'lastRace', (value) ->
-    if value != undefined && value.$value != undefined
-      $scope.race = fbutil.syncObject(['races', value.$value]);
 
   parseRoundsForCar = (rounds, car) ->
     roundData = {

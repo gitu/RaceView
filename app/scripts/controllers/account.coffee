@@ -8,15 +8,24 @@
 Provides rudimentary account management functions.
 ###
 angular.module("raceViewApp").controller "AccountCtrl", ($scope, user, simpleLogin, fbutil, $timeout, $mdDialog) ->
+  $scope.user = user
   loadProfile = (user) ->
+    $scope.user = user
     $scope.profile.$destroy()  if $scope.profile
-    fbutil.syncObject("users/" + user.uid).$bindTo $scope, "profile"
+    $scope.publicProfile.$destroy()  if $scope.publicProfile
+    $scope.profile = fbutil.syncObject("users/" + user.uid)
+    $scope.publicProfile = fbutil.syncObject("publicUsers/" + user.uid)
     return
 
-  $scope.user = user
   $scope.logout = simpleLogin.logout
   $scope.alert = undefined
-  loadProfile user
+  loadProfile user if user.provider == "password"
+
+  $scope.$watch 'profile.name', (newValue) ->
+    if newValue? && user.provider == "password"
+      console.log('set username')
+      $scope.publicProfile.displayName = newValue
+      $scope.publicProfile.$save()
 
   $scope.showChangePasswordDialog = (ev) ->
     $mdDialog.show(

@@ -10,7 +10,7 @@
         },
         "races": {
             ".read": true,
-            ".write": "auth.uid === 'simplelogin:5'"
+            ".write": "auth.uid === 'simplelogin:5' || auth.uid === 'google:103104093420191004970'"
         },
         "trackState": {
             ".read": true,
@@ -21,6 +21,20 @@
                 ".read": "$user_id === auth.uid",
                 ".write": "$user_id === auth.uid"
             }
+        },
+        "publicUsers": {
+            ".read": true,
+            "$user_id": {
+                ".write": "$user_id === auth.uid"
+            }
+        },
+        "raceRequests": {
+            ".read": true,
+            ".write": true
+        },
+        "cars": {
+            ".read": true,
+            ".write": "auth.uid === 'simplelogin:5' || auth.uid === 'google:103104093420191004970'"
         }
     }
 }

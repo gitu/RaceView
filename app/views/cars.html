@@ -1,0 +1,22 @@
+<md-content>
+    <div layout="vertical">
+        <div ng-repeat="car in cars">
+            <pre>{{car | json}}</pre>
+            <md-button ng-click="deleteCar(car.id)">delete</md-button>
+        </div>
+        <div>
+            <form>
+                <select ng-model="car.id" ng-options="id for id in [1,2,3,4,5,6,7,8]">
+                    <option value="">-- choose id --</option>
+                </select>
+                <select ng-model="car.image" ng-options="image for image in images">
+                    <option value="">-- choose image --</option>
+                </select>
+                <md-text-float ng-model="car.text" label="TEXT"></md-text-float>
+                <md-button ng-click="setCar(car)">SET CAR</md-button>
+            </form>
+        </div>
+    </div>
+
+
+</md-content>

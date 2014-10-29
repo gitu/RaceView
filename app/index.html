@@ -36,20 +36,13 @@
         <div ng-repeat="section in menu.sections">
 
             <button class="menu-item menu-title"
-                    ng-class="{active: menu.isSectionSelected(section)}"
-                    ng-click="menu.toggleSelectSection(section)"
+                    ng-show="menu.showPage(section, page)"
+                    ng-repeat="page in section.pages"
+                    ng-class="{active: menu.isPageSelected(section, page)}"
+                    ng-click="menu.goto(page.url)"
                     ink-ripple>
-                {{section.name}}
-            </button>
-
-            <a class="menu-item menu-sub-item"
-               ng-show="menu.showPage(section, page)"
-               ng-repeat="page in section.pages"
-               ng-class="{active: menu.isPageSelected(section, page)}"
-               ng-href="#{{page.url}}"
-               ink-ripple>
                 <span ng-bind="page | humanizeDoc"></span>
-            </a>
+            </button>
 
         </div>
     </md-content>
@@ -133,6 +126,8 @@
 <script src="bower_components/angular-material/angular-material.js"></script>
 <script src="bower_components/angularytics/dist/angularytics.min.js"></script>
 <script src="bower_components/d3/d3.js"></script>
+<script src="bower_components/angular-gravatar/build/md5.js"></script>
+<script src="bower_components/angular-gravatar/build/angular-gravatar.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 
@@ -155,6 +150,8 @@
 <script src="scripts/filters/humanizedoc.js"></script>
 <script src="scripts/filters/directivebrackets.js"></script>
 <script src="scripts/directives/tank.js"></script>
+<script src="scripts/controllers/participants.js"></script>
+<script src="scripts/controllers/cars.js"></script>
 <!-- endbuild -->
 </body>
 </html>

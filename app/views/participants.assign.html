@@ -1,0 +1,17 @@
+<md-dialog aria-label="Select Car">
+    <md-content class="dialog-content">
+        <md-radio-group ng-model="selectedCar">
+            <md-radio-button ng-repeat="car in cars" value="{{car.id}}">{{car.text}}</md-radio-button>
+            <md-radio-button value="-1" ng-show="hasCar">deselect</md-radio-button>
+        </md-radio-group>
+        <pre>{{currentUser|json}}</pre>
+    </md-content>
+    <div class="md-actions" layout="horizontal" layout-align="end">
+        <md-button ng-click="hide()">
+            Cancel
+        </md-button>
+        <md-button class="md-primary" ng-click="answer(selectedCar)">
+            Okay
+        </md-button>
+    </div>
+</md-dialog>

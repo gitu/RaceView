@@ -424,3 +424,14 @@ pre > code.highlight {
   text-align: center;
   vertical-align: middle;
 }
+
+.profile-pic {
+  -moz-border-radius: 50px/50px;
+  -webkit-border-radius: 50px 50px;
+  border-radius: 50px/50px;
+  border: 1px solid #ddd;
+  height: 50px;
+  width: 50px;
+  background-position: center;
+  background-size: cover;
+}
