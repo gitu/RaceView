@@ -39,10 +39,11 @@ angular.module('raceViewApp')
         console.log('setting car: ' + answer)
         if !!!$scope.qualifying.cars[answer]
           $scope.qualifying.cars[answer] = {id: answer}
+        console.log($scope.qualifying.cars[answer])
         $scope.qualifying.cars[answer].id = answer
         $scope.qualifying.cars[answer].currentOwner = request.uid
-        $scope.qualifying.cars[answer].image = $scope.car[answer].image
-        $scope.qualifying.cars[answer].text = $scope.car[answer].text
+        $scope.qualifying.cars[answer].image = $scope.cars[answer].image
+        $scope.qualifying.cars[answer].text = $scope.cars[answer].text
       $scope.qualifying.$save()
       return
     ), ->
