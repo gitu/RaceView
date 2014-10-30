@@ -41,6 +41,24 @@ angular.module("raceViewApp").factory "menu", ($location, $rootScope, simpleLogi
           url: "/current"
           show: 'auth'
         }
+        {
+          name: "Driver Display"
+          id: "driverDisplay"
+          url: "/driver-display"
+          show: 'auth'
+        }
+        {
+          name: "Last Race"
+          id: "lastRaceTable"
+          url: "/last-race"
+          show: 'auth'
+        }
+        {
+          name: "Last Qualifying"
+          id: "lastQualiTable"
+          url: "/last-quali"
+          show: 'auth'
+        }
       ]
     }
     {

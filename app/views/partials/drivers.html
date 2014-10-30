@@ -1,0 +1,40 @@
+<div layout="vertical" layout-sm="horizontal" layout-padding>
+    <div flex ng-repeat="car in currentCars" ng-if="!!qualifying.cars[car.nr].currentOwner">
+        <div layout="vertical">
+            <div><h3 class="layout-label">{{cars[car.nr].text}}</h3></div>
+            <div layout="horizontal">
+                <div flex>
+                    <tank tank-width="150" track-state="trackState" car-nr="car.nr"></tank>
+                </div>
+                <div flex>
+                    <div layout="vertical" ng-show="!!car.race.rank">
+                        <div class="rank" flex>{{car.race.rank}}</div>
+                        <div ng-hide="car.race.roundDiff==0" class="roundsBehind">{{car.race.roundDiff}} rounds</div>
+                    </div>
+                </div>
+            </div>
+            <div layout="horizontal">
+                <div flex>
+                    <div ng-style="{'background-image': 'url(\'/images/cars/' + cars[car.nr].image + '.png\')' }" class="car-pic"></div>
+                </div>
+                <div flex>
+                    <div ng-if="!!car.owner" ng-style="{'background-image': 'url(\'' + users[car.owner].pictureUrl + '\')' }" class="profile-pic"></div>
+                    <div ng-if="!!car.owner" ng-bind="users[car.owner].displayName"></div>
+                </div>
+            </div>
+            <div>
+                <h3 class="layout-title">Fastest Round: </h3>
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Quali</th>
+                        <th>Race</th>
+                    </tr>
+                    <tr>
+                        <td>{{car.qualifying.fastest.time/1000}}s</td>
+                        <td>{{car.race.fastest.time/1000}}s</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -101,12 +101,21 @@ angular.module("raceViewApp").config([
     .when '/participants',
       templateUrl: 'views/participants.html'
       controller: 'ParticipantsCtrl'
+
     .when '/cars',
       templateUrl: 'views/cars.html'
       controller: 'CarsCtrl'
+
     .when '/driver-display',
       templateUrl: 'views/driver-display.html'
-      controller: 'DriverDisplayCtrl'
+      controller: 'CurrentCtrl'
+
+    .when '/last-race',
+      templateUrl: 'views/last-race.html'
+      controller: 'CurrentCtrl'
+    .when '/last-quali',
+      templateUrl: 'views/last-quali.html'
+      controller: 'CurrentCtrl'
     .otherwise redirectTo: "/"
 
 ]).run([

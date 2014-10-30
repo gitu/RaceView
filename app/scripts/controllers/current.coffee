@@ -45,7 +45,8 @@ angular.module('raceViewApp').controller 'CurrentCtrl', ($scope, $timeout, fbuti
         if car.currentOwner?
           $scope.currentCars[index].owner = car.currentOwner
         carData = $scope.currentCars[index]
-        carData[type] = parseRoundsForCar(race[type].rounds, index)
+        if race[type]? and race[type].rounds?
+          carData[type] = parseRoundsForCar(race[type].rounds, index)
 
   getPositions = () ->
     sortedCars = []
@@ -91,6 +92,8 @@ angular.module('raceViewApp').controller 'CurrentCtrl', ($scope, $timeout, fbuti
       $timeout (->
         parseRace($scope.qualifying, 'qualifying')
       ), 10
+
+
 
 
 

@@ -1,0 +1,12 @@
+<div ng-show="trackState.startLamp >= 1 && trackState.startLamp <= 6">
+    <div layout="vertical" align="center">
+        <div layout="horizontal">
+            <div flex></div>
+            <div ng-repeat="li in [1,2,3,4,5]">
+                <i class="fa fa-5x fa-fw" ng-class="{'fa-circle-o':trackState.startLamp<=li,'fa-circle':trackState.startLamp>li}"></i>
+            </div>
+            <div flex></div>
+        </div>
+        <div class="get-ready" ng-show="trackState.startLamp == 1">GET READY</div>
+    </div>
+</div>

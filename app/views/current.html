@@ -1,99 +1,20 @@
 <md-content>
-    <div layout="horizontal">
+    <div layout="vertical">
 
-        <div class="alert-info" ng-show="trackState.startLamp == 1">
-            <h1>GET READY</h1>
-        </div>
+        <div ng-include="'views/partials/start-lights.html'"></div>
 
-        <div class="alert-info" ng-show="trackState.startLamp > 1 && trackState.startLamp <= 6">
-            <h1>{{6-trackState.startLamp}}</h1>
-        </div>
-    </div>
+        <div ng-include="'views/partials/drivers.html'"></div>
 
-    <div layout="vertical" layout-sm="horizontal" layout-padding>
-        <div flex ng-repeat="car in currentCars">
-            <div layout="vertical">
-                <div><h3 class="layout-label">{{cars[car.nr].text}}</h3></div>
-                <div layout="horizontal">
-                    <div flex>
-                        <tank tank-width="150" track-state="trackState" car-nr="car.nr"></tank>
-                    </div>
-                    <div flex>
-                        <div layout="vertical" ng-show="!!car.race.rank">
-                            <div class="rank" flex>{{car.race.rank}}</div>
-                            <div ng-hide="car.race.timeDiff==0" ng-class="{timeBehind:car.race.timeDiff>0,timeBefore:car.race.timeDiff<0}">{{car.race.timeDiff/1000}}s</div>
-                            <div ng-hide="car.race.roundDiff==0" class="roundsBehind">{{car.race.roundDiff}} rounds</div>
-                        </div>
-                    </div>
-                </div>
-                <div layout="horizontal">
-                    <div flex>
-                        <div ng-style="{'background-image': 'url(\'/images/cars/' + cars[car.nr].image + '.png\')' }" class="car-pic"></div>
-                    </div>
-                    <div flex>
-                        <div ng-if="!!car.owner" ng-style="{'background-image': 'url(\'' + users[car.owner].pictureUrl + '\')' }" class="profile-pic"></div>
-                        <div ng-if="!!car.owner" ng-bind="users[car.owner].displayName"></div>
-                    </div>
-                </div>
-                <div>
-                    <h3 class="layout-title">Fastest Round: </h3>
-                    <table class="table table-bordered">
-                        <tr>
-                            <th>Quali</th>
-                            <th>Race</th>
-                        </tr>
-                        <tr>
-                            <td>{{car.qualifying.fastest.time/1000}}s</td>
-                            <td>{{car.race.fastest.time/1000}}s</td>
-                        </tr>
-                    </table>
-                </div>
+        <div layout="vertical" layout-sm="horizontal" layout-padding>
+            <div flex>
+                <div ng-include="'views/partials/race-table.html'"></div>
+            </div>
+
+            <div flex ng-if="qualifying.status==='qualifying'">
+                <div ng-include="'views/partials/quali-table.html'"></div>
             </div>
         </div>
+        <p class="alert alert-danger" ng-show="err">{{err}}</p>
     </div>
-
-    <div layout="vertical" layout-sm="horizontal" layout-padding>
-        <div flex>
-            Race
-            <table class="table table-striped">
-                <tr>
-                    <th>Round</th>
-                    <th ng-repeat="car in currentCars">
-                        {{cars[car.nr].text}}
-                    </th>
-                </tr>
-                <tr ng-repeat="(roundId,round) in race.race.rounds | reverse">
-                    <td><b>{{race.race.rounds.length - roundId}}</b></td>
-                    <td ng-repeat="car in currentCars">
-                        <div ng-show="car.race.rounds[race.race.rounds.length - roundId -1].time" ng-class="{fastest:car.race.rounds[race.race.rounds.length - roundId -1].fastest}">
-                        {{car.race.rounds[race.race.rounds.length - roundId -1].time/1000}}s
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-        <div flex>
-            Qualifying
-            <table class="table table-striped">
-                <tr>
-                    <th>Round</th>
-                    <th ng-repeat="car in currentCars | filterBy:{owner:'true'}">
-                    {{cars[car.nr].text}}
-                    </th>
-                </tr>
-                <tr ng-repeat="(roundId,round) in qualifying.qualifying.rounds | reverse">
-                    <td><b>{{qualifying.qualifying.rounds.length - roundId}}</b></td>
-                    <td ng-repeat="car in currentCars">
-                        <div ng-show="car.qualifying.rounds[qualifying.qualifying.rounds.length - roundId -1].time"
-                             ng-class="{fastest:car.qualifying.rounds[qualifying.qualifying.rounds.length - roundId -1].fastest}">
-                        {{car.qualifying.rounds[qualifying.qualifying.rounds.length - roundId -1 ].time/1000}}s
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
-    <p class="alert alert-danger" ng-show="err">{{err}}</p>
 
 </md-content>
