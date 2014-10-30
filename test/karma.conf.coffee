@@ -31,6 +31,9 @@ module.exports = (config) ->
       'bower_components/hammerjs/hammer.js'
       'bower_components/angular-material/angular-material.js'
       'bower_components/angularytics/dist/angularytics.min.js'
+      'bower_components/d3/d3.js'
+      'bower_components/angular-gravatar/build/md5.js'
+      'bower_components/angular-gravatar/build/angular-gravatar.js'
 
       'app/scripts/**/*.coffee'
       'app/scripts/angularfire/*.js'
