@@ -49,7 +49,8 @@ angular.module('raceViewApp')
       return
     return
 
-  AssignRequestCtrl = ($scope, $mdDialog, cars, hasCar, qualifying) ->
+angular.module('raceViewApp')
+.controller 'AssignRequestCtrl', ($scope, $mdDialog, cars, hasCar, qualifying) ->
     $scope.cars = cars
     $scope.hasCar = hasCar
     $scope.qualifying = qualifying
