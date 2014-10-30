@@ -3,7 +3,7 @@
         <md-radio-group ng-model="selectedCar">
             <md-radio-button ng-repeat="car in cars" value="{{car.id}}">
                 <div layout="horizontal">
-                    <i ng-class="{'fa-user':!!car.currentOwner,'fa-square-o':!!!car.currentOwner}"
+                    <i ng-class="{'fa-user':!!qualifying.cars[car.id].currentOwner,'fa-square-o':!!!qualifying.cars[car.id].currentOwner}"
                        class="fa fa-2x fa-fw"></i>
 
                     <div ng-style="{'background-image': 'url(\'/images/cars/' + car.image + '.png\')' }" class="car-pic"

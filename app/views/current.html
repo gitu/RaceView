@@ -21,12 +21,8 @@
                     <div flex>
                         <div layout="vertical" ng-show="!!car.race.rank">
                             <div class="rank" flex>{{car.race.rank}}</div>
-                            <div ng-hide="car.race.timeDiff==0"
-                                 ng-class="{timeBehind:car.race.timeDiff>0,timeBefore:car.race.timeDiff<0}">
-                                {{car.race.timeDiff/1000}}s
-                            </div>
-                            <div ng-hide="car.race.roundDiff==0" class="roundsBehind">{{car.race.roundDiff}} rounds
-                            </div>
+                            <div ng-hide="car.race.timeDiff==0" ng-class="{timeBehind:car.race.timeDiff>0,timeBefore:car.race.timeDiff<0}">{{car.race.timeDiff/1000}}s</div>
+                            <div ng-hide="car.race.roundDiff==0" class="roundsBehind">{{car.race.roundDiff}} rounds</div>
                         </div>
                     </div>
                 </div>
@@ -60,9 +56,8 @@
                 <tr ng-repeat="(roundId,round) in race.race.rounds | reverse">
                     <td><b>{{race.race.rounds.length - roundId}}</b></td>
                     <td ng-repeat="car in cars">
-                        <div ng-show="car.race.rounds[race.race.rounds.length - roundId -1].time"
-                             ng-class="{fastest:car.race.rounds[race.race.rounds.length - roundId -1].fastest}">
-                        {{car.race.rounds[race.race.rounds.length - roundId -1].time/1000}}s
+                        <div ng-show="car.race.rounds[race.race.rounds.length - roundId -1].time" ng-class="{fastest:car.race.rounds[race.race.rounds.length - roundId -1].fastest}">
+                            {{car.race.rounds[race.race.rounds.length - roundId -1].time/1000}}s
                         </div>
                     </td>
                 </tr>

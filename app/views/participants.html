@@ -11,7 +11,7 @@
                 <td>{{request.timestamp | date:'yyyy-MM-dd HH:mm:ss Z'}}</td>
                 <td>
                     <div ng-if="hasCar(request)"
-                         ng-style="{'background-image': 'url(\'/images/cars/' + getCar(request).image + '.png\')' }"
+                         ng-style="{'background-image': 'url(\'/images/cars/' + cars[getCar(request).id].image + '.png\')' }"
                          class="car-pic"></div>
                 </td>
                 <td ng-show="menu.isConfinale()">
@@ -28,6 +28,5 @@
                    ng-click="requestRaceParticipation(currentUser)" ng-show="canAddToRaceList(currentUser)">request race
             participation
         </md-button>
-    </div>
     </div>
 </md-content>

@@ -14,7 +14,7 @@ angular.module('raceViewApp')
 
   $scope.getCar = (request) ->
     cars = []
-    angular.forEach $scope.cars, (car, key) ->
+    angular.forEach $scope.qualifying.cars, (car, key) ->
       if car.currentOwner? and request.uid?
         if car.currentOwner == request.uid
           this.push car
@@ -30,22 +30,29 @@ angular.module('raceViewApp')
       templateUrl: "views/participants.assign.html"
       targetEvent: ev
       controller: AssignRequestCtrl
-      locals: {cars: $scope.cars, hasCar: $scope.hasCar(request)}
+      locals: {cars: $scope.cars, hasCar: $scope.hasCar(request), qualifying: $scope.qualifying}
     ).then ((answer)->
       if $scope.hasCar(request)
         console.log $scope.getCar(request)
         delete $scope.getCar(request).currentOwner
       if answer? && answer > 0
-        $scope.cars[answer].currentOwner = request.uid
-      $scope.cars.$save()
+        console.log('setting car: ' + answer)
+        if !!!$scope.qualifying.cars[answer]
+          $scope.qualifying.cars[answer] = {id: answer}
+        $scope.qualifying.cars[answer].id = answer
+        $scope.qualifying.cars[answer].currentOwner = request.uid
+        $scope.qualifying.cars[answer].image = $scope.car[answer].image
+        $scope.qualifying.cars[answer].text = $scope.car[answer].text
+      $scope.qualifying.$save()
       return
     ), ->
       return
     return
 
-  AssignRequestCtrl = ($scope, $mdDialog, cars, hasCar) ->
+  AssignRequestCtrl = ($scope, $mdDialog, cars, hasCar, qualifying) ->
     $scope.cars = cars
     $scope.hasCar = hasCar
+    $scope.qualifying = qualifying
     $scope.hide = ->
       $mdDialog.hide()
       return
