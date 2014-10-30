@@ -435,3 +435,14 @@ pre > code.highlight {
   background-position: center;
   background-size: cover;
 }
+
+.car-pic {
+  -moz-border-radius: 5px/5px;
+  -webkit-border-radius: 5px 5px;
+  border-radius: 5px/5px;
+  border: 1px solid #ddd;
+  height: 50px;
+  width: 70px;
+  background-position: center;
+  background-size: cover;
+}

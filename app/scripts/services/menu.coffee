@@ -39,6 +39,7 @@ angular.module("raceViewApp").factory "menu", ($location, $rootScope, simpleLogi
           name: "Current Race"
           id: "current"
           url: "/current"
+          show: 'auth'
         }
       ]
     }
@@ -49,7 +50,7 @@ angular.module("raceViewApp").factory "menu", ($location, $rootScope, simpleLogi
           name: "Participants"
           id: "participants"
           url: "/participants"
-          show: 'confinaleOnly'
+          show: 'auth'
         }
         {
           name: "Login"
@@ -95,6 +96,9 @@ angular.module("raceViewApp").factory "menu", ($location, $rootScope, simpleLogi
       return !isLoggedIn if page.show is 'noauth'
       return isLoggedIn if page.show is 'auth'
       return isConfinale if page.show is 'confinaleOnly'
+
+    isConfinale: () ->
+      return isConfinale
 
     goto: (url) ->
       $location.path(url)

@@ -104,6 +104,9 @@ angular.module("raceViewApp").config([
     .when '/cars',
       templateUrl: 'views/cars.html'
       controller: 'CarsCtrl'
+    .when '/driver-display',
+      templateUrl: 'views/driver-display.html'
+      controller: 'DriverDisplayCtrl'
     .otherwise redirectTo: "/"
 
 ]).run([

@@ -141,15 +141,17 @@ angular.module('raceViewApp')
       if ($scope.inTanking)
         $scope.tankImage
         .transition()
-        .duration(300)
-        .ease("cubic")
+        .duration(100)
+        .ease("linear")
         .attr("y", -$scope.radius / 1.8)
         .attr("x", -$scope.radius / 5)
         .attr("height", $scope.radius / 1.8)
         .attr("width", $scope.radius / 1.8)
+        .attr("color", "#00ff00")
         .transition()
-        .duration(300)
-        .ease("cubic")
+        .delay(600)
+        .duration(100)
+        .ease("linear")
         .attr("y", -$scope.radius / 2)
         .attr("x", -$scope.radius / 6)
         .attr("height", $scope.radius / 3)
@@ -160,8 +162,12 @@ angular.module('raceViewApp')
     $scope.$watch "trackState.pitLaneBitMask", (newValue) ->
       if (newValue != undefined && $scope.tankImage != undefined)
         v1 = newValue >> ($scope.carNr)
-        $scope.inTanking = (v1 & 1) == 1
-        $scope.tankAnim()
+        inTanking = (v1 & 1) == 1
+        if not $scope.inTanking and inTanking
+          $scope.inTanking = inTanking
+          $scope.tankAnim()
+        else
+          $scope.inTanking = inTanking
 
 
     $scope.$watch "trackState.gas" + $scope.carNr, (newValue) ->

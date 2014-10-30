@@ -8,18 +8,18 @@
  # Controller of the raceViewApp
 ###
 angular.module('raceViewApp')
-.controller 'ParticipantsCtrl', ($scope, $mdDialog) ->
+.controller 'ParticipantsCtrl', ($scope, $mdDialog, $filter) ->
   $scope.hasCar = (request) ->
-    angular.forEach $scope.cars, (car) ->
-      if car.currentOwner == request.uid
-        return true
-    return false
+    return $scope.getCar(request)?
 
   $scope.getCar = (request) ->
-    angular.forEach $scope.cars, (car) ->
-      if car.currentOwner == request.uid
-        return car
-    return null
+    cars = []
+    angular.forEach $scope.cars, (car, key) ->
+      if car.currentOwner? and request.uid?
+        if car.currentOwner == request.uid
+          this.push car
+    , cars
+    return cars[0]
 
   $scope.removeRequest = (request) ->
     if not $scope.hasCar(request.car)
@@ -32,7 +32,12 @@ angular.module('raceViewApp')
       controller: AssignRequestCtrl
       locals: {cars: $scope.cars, hasCar: $scope.hasCar(request)}
     ).then ((answer)->
-      console.log(answer + "-" + request);
+      if $scope.hasCar(request)
+        console.log $scope.getCar(request)
+        delete $scope.getCar(request).currentOwner
+      if answer? && answer > 0
+        $scope.cars[answer].currentOwner = request.uid
+      $scope.cars.$save()
       return
     ), ->
       return

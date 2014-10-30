@@ -79,13 +79,19 @@ angular.module("raceViewApp").controller "AppCtrl", ($scope, $mdSidenav, $timeou
   $scope.raceRequests = fbutil.syncArray('raceRequests')
   $scope.users = fbutil.syncObject('publicUsers')
   $scope.cars = fbutil.syncObject('cars')
-  $scope.inRaceList = (user) ->
+  $scope.canAddToRaceList = (user) ->
     if user?
-      $filter('filter')($scope.raceRequests, {uid: user.uid}).length > 0
+      filteredRequests = $filter('filter')($scope.raceRequests, {uid: user.uid})
+      return true if filteredRequests.length == 0
+      return filteredRequests[0].timestamp < new Date().getTime() - 60000
+    return false
 
 
   $scope.requestRaceParticipation = (user) ->
     return if not user?
+    filteredRequests = $filter('filter')($scope.raceRequests, {uid: user.uid})
+    if filteredRequests.length > 0
+      $scope.raceRequests.$remove(filteredRequests[0])
     $scope.raceRequests.$add({
       uid: user.uid
       timestamp: Firebase.ServerValue.TIMESTAMP
