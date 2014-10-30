@@ -29,7 +29,7 @@ angular.module('raceViewApp')
     $mdDialog.show(
       templateUrl: "views/participants.assign.html"
       targetEvent: ev
-      controller: AssignRequestCtrl
+      controller: 'AssignRequestCtrl'
       locals: {cars: $scope.cars, hasCar: $scope.hasCar(request), qualifying: $scope.qualifying}
     ).then ((answer)->
       if $scope.hasCar(request)
