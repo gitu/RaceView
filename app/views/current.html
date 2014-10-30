@@ -11,9 +11,9 @@
     </div>
 
     <div layout="vertical" layout-sm="horizontal" layout-padding>
-        <div flex ng-repeat="car in cars">
+        <div flex ng-repeat="car in currentCars">
             <div layout="vertical">
-                <div><h3 class="layout-label">{{car.title}}</h3></div>
+                <div><h3 class="layout-label">{{cars[car.nr].text}}</h3></div>
                 <div layout="horizontal">
                     <div flex>
                         <tank tank-width="150" track-state="trackState" car-nr="car.nr"></tank>
@@ -24,6 +24,15 @@
                             <div ng-hide="car.race.timeDiff==0" ng-class="{timeBehind:car.race.timeDiff>0,timeBefore:car.race.timeDiff<0}">{{car.race.timeDiff/1000}}s</div>
                             <div ng-hide="car.race.roundDiff==0" class="roundsBehind">{{car.race.roundDiff}} rounds</div>
                         </div>
+                    </div>
+                </div>
+                <div layout="horizontal">
+                    <div flex>
+                        <div ng-style="{'background-image': 'url(\'/images/cars/' + cars[car.nr].image + '.png\')' }" class="car-pic"></div>
+                    </div>
+                    <div flex>
+                        <div ng-if="!!car.owner" ng-style="{'background-image': 'url(\'' + users[car.owner].pictureUrl + '\')' }" class="profile-pic"></div>
+                        <div ng-if="!!car.owner" ng-bind="users[car.owner].displayName"></div>
                     </div>
                 </div>
                 <div>
@@ -49,14 +58,14 @@
             <table class="table table-striped">
                 <tr>
                     <th>Round</th>
-                    <th ng-repeat="car in cars">
-                        {{car.title}}
+                    <th ng-repeat="car in currentCars">
+                        {{cars[car.nr].text}}
                     </th>
                 </tr>
                 <tr ng-repeat="(roundId,round) in race.race.rounds | reverse">
                     <td><b>{{race.race.rounds.length - roundId}}</b></td>
-                    <td ng-repeat="car in cars">
-                        <div ng-show="car.race.rounds[race.race.rounds.length - roundId -1].time" ng-class="{fastest:car.race.rounds[race.race.rounds.length - roundId -1].fastest}">
+                    <td ng-repeat="car in currentCars">
+                    <div ng-show="car.race.rounds[race.race.rounds.length - roundId -1].time" ng-class="{fastest:car.race.rounds[race.race.rounds.length - roundId -1].fastest}">
                             {{car.race.rounds[race.race.rounds.length - roundId -1].time/1000}}s
                         </div>
                     </td>
@@ -69,14 +78,14 @@
             <table class="table table-striped">
                 <tr>
                     <th>Round</th>
-                    <th ng-repeat="car in cars">
-                        {{car.title}}
+                    <th ng-repeat="car in currentCars">
+                        {{cars[car.nr].text}}
                     </th>
                 </tr>
                 <tr ng-repeat="(roundId,round) in qualifying.qualifying.rounds | reverse">
                     <td><b>{{qualifying.qualifying.rounds.length - roundId}}</b></td>
-                    <td ng-repeat="car in cars">
-                        <div ng-show="car.qualifying.rounds[qualifying.qualifying.rounds.length - roundId -1].time"
+                    <td ng-repeat="car in currentCars">
+                    <div ng-show="car.qualifying.rounds[qualifying.qualifying.rounds.length - roundId -1].time"
                              ng-class="{fastest:car.qualifying.rounds[qualifying.qualifying.rounds.length - roundId -1].fastest}">
                         {{car.qualifying.rounds[qualifying.qualifying.rounds.length - roundId -1 ].time/1000}}s
                         </div>

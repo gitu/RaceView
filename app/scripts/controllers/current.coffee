@@ -15,7 +15,7 @@ angular.module('raceViewApp').controller 'CurrentCtrl', ($scope, $timeout, fbuti
       $scope.err = null
     ), 5000
 
-  $scope.cars = {};
+  $scope.currentCars = {};
 
   parseRoundsForCar = (rounds, car) ->
     roundData = {
@@ -39,15 +39,17 @@ angular.module('raceViewApp').controller 'CurrentCtrl', ($scope, $timeout, fbuti
 
   parseRace = (race, type) ->
     angular.forEach race.cars, (car, index) ->
-      if car.raw != undefined
-        if $scope.cars[index] == undefined
-          $scope.cars[index] = {title: 'Car ' + index, nr: index}
-        carData = $scope.cars[index]
+      if car.raw? or car.currentOwner?
+        if $scope.currentCars[index] == undefined
+          $scope.currentCars[index] = {title: 'Car ' + index, nr: index}
+        if car.currentOwner?
+          $scope.currentCars[index].owner = car.currentOwner
+        carData = $scope.currentCars[index]
         carData[type] = parseRoundsForCar(race[type].rounds, index)
 
   getPositions = () ->
     sortedCars = []
-    angular.forEach $scope.cars, (car) ->
+    angular.forEach $scope.currentCars, (car) ->
       car.race.totalRounds = car.race.rounds.length
       totalTime = 0
       angular.forEach car.race.rounds, (round) ->
