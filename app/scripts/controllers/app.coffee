@@ -75,6 +75,11 @@ angular.module("raceViewApp").controller "AppCtrl", ($scope, $mdSidenav, $timeou
         });
       console.log('logged in as: ' + name)
 
+      $timeout ->
+        if $scope.canAddToRaceList(user)
+          $scope.requestRaceParticipation(user)
+      , 500
+
 
   $scope.raceRequests = fbutil.syncArray('raceRequests')
   $scope.users = fbutil.syncObject('publicUsers')
