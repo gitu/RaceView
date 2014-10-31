@@ -1,0 +1,19 @@
+<h3 class="layout-title">
+    Qualifying
+</h3>
+<table class="table table-striped">
+    <tr>
+        <th>Round</th>
+        <th ng-repeat="car in race.cars track by $index" ng-show="!!car.currentOwner || !!currentCars[car.id].race.rounds">
+            {{users[car.currentOwner].displayName}}<br/>in {{cars[car.id].text}}
+        </th>
+    </tr>
+    <tr ng-repeat="(roundId,round) in race.race.rounds | reverse">
+        <td><b>{{race.race.rounds.length - roundId}}</b></td>
+        <td ng-repeat="car in race.cars track by $index" ng-show="!!car.currentOwner">
+            <div ng-show="currentCars[car.id].race.rounds[race.race.rounds.length - roundId -1].time" ng-class="{fastest:currentCars[car.id].race.rounds[race.race.rounds.length - roundId -1].fastest}">
+                {{currentCars[car.id].race.rounds[race.race.rounds.length - roundId -1].time/1000}}s
+            </div>
+        </td>
+    </tr>
+</table>

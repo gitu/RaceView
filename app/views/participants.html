@@ -14,8 +14,17 @@
                          ng-style="{'background-image': 'url(\'/images/cars/' + cars[getCar(request).id].image + '.png\')' }"
                          class="car-pic"></div>
                 </td>
+                <td>
+                    <div ng-if="hasCarRace(request)"
+                         ng-style="{'background-image': 'url(\'/images/cars/' + cars[getCar(request).id].image + '.png\')' }"
+                         class="car-pic"></div>
+                </td>
                 <td ng-show="menu.isConfinale()">
                     <md-button class="md-button-raised" ng-click="showAssignCarDialog($event,request)">assign
+                    </md-button>
+                </td>
+                <td ng-show="menu.isConfinale()">
+                    <md-button class="md-button-raised" ng-click="showAssignCarDialogRace($event,request)">assign race
                     </md-button>
                 </td>
                 <td ng-show="menu.isConfinale()">

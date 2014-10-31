@@ -4,8 +4,8 @@
 <table class="table table-striped">
     <tr>
         <th>Round</th>
-        <th ng-repeat="car in race.cars track by $index" ng-show="!!car.currentOwner">
-            {{users[car.currentOwner].displayName}}<br/>in {{cars[car.id].text}}
+        <th ng-repeat="car in race.cars track by $index">
+        {{users[car.currentOwner].displayName}}<br/>in {{cars[car.id].text}}
         </th>
     </tr>
     <tr ng-repeat="(roundId,round) in race.race.rounds | reverse">
