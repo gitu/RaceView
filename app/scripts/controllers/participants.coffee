@@ -34,8 +34,7 @@ angular.module('raceViewApp')
     return cars[0]
 
   $scope.removeRequest = (request) ->
-    if not $scope.hasCar(request.car)
-      $scope.raceRequests.$remove(request)
+    $scope.raceRequests.$remove(request)
 
   $scope.showAssignCarDialog = (ev, request) ->
     $mdDialog.show(
