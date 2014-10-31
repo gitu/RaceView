@@ -10,8 +10,8 @@
     </tr>
     <tr ng-repeat="(roundId,round) in qualifying.qualifying.rounds | reverse">
         <td><b>{{qualifying.qualifying.rounds.length - roundId}}</b></td>
-        <td ng-repeat="car in qualifying.cars track by $index" ng-show="!!car.currentOwner">
-            <div ng-show="currentCars[car.id].qualifying.rounds[qualifying.qualifying.rounds.length - roundId -1].time" ng-class="{fastest:currentCars[car.id].qualifying.rounds[qualifying.qualifying.rounds.length - roundId -1].fastest}">
+        <td ng-repeat="car in qualifying.cars track by $index" ng-show="!!car.currentOwner || !!currentCars[car.id].qualifying.rounds">
+        <div ng-show="currentCars[car.id].qualifying.rounds[qualifying.qualifying.rounds.length - roundId -1].time" ng-class="{fastest:currentCars[car.id].qualifying.rounds[qualifying.qualifying.rounds.length - roundId -1].fastest}">
                 {{currentCars[car.id].qualifying.rounds[qualifying.qualifying.rounds.length - roundId -1].time/1000}}s
             </div>
         </td>
