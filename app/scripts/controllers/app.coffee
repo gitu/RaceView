@@ -53,7 +53,7 @@ angular.module("raceViewApp").controller "AppCtrl", ($scope, $mdSidenav, $timeou
         name = switch user.provider
           when "google" then user.displayName
           when "facebook" then user.displayName
-          when "github" then user.displayName
+          when "github" then user.thirdPartyUserData.name
           when "password" then user.email
       $scope.currentUser.pictureUrl = pictureUrl
       $scope.currentUser.displayName = name
