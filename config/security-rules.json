@@ -32,6 +32,14 @@
             ".read": true,
             ".write": true
         },
+        "rounds": {
+            ".read": true,
+            ".write": "auth.uid === 'simplelogin:5' || auth.uid === 'google:103104093420191004970' || auth.uid == 'google:117766290113413539913'"
+        },
+        "display": {
+            ".read": true,
+            ".write": "auth.uid === 'simplelogin:5' || auth.uid === 'google:103104093420191004970' || auth.uid == 'google:117766290113413539913'"
+        },
         "cars": {
             ".read": true,
             ".write": "auth.uid === 'simplelogin:5' || auth.uid === 'google:103104093420191004970' || auth.uid == 'google:117766290113413539913'"

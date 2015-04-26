@@ -7,13 +7,14 @@
  # # menu
  # Factory in the raceViewApp.
 ###
-angular.module("raceViewApp").factory "menu", ($location, $rootScope, simpleLogin) ->
+angular.module("raceViewApp").factory "menu", ($location, $rootScope, simpleLogin, fbutil) ->
   isLoggedIn = false;
   isConfinale = false;
+  displayType = fbutil.syncObject('display')
+
   simpleLogin.watch (user) ->
     isLoggedIn = !!user
     isConfinale = !!user && user.provider == 'google' && user.thirdPartyUserData.hd == 'confinale.ch'
-    return
   sortByName = (a, b) ->
     (if a.name < b.name then -1 else 1)
   sortByHumanName = (a, b) ->
@@ -59,6 +60,18 @@ angular.module("raceViewApp").factory "menu", ($location, $rootScope, simpleLogi
           url: "/last-quali"
           show: 'auth'
         }
+        {
+          name: "Plot"
+          id: "plot"
+          url: "/plot"
+          show: 'simple'
+        }
+        {
+          name: "Rounds"
+          id: "rounds"
+          url: "/rounds"
+          show: 'simple'
+        }
       ]
     }
     {
@@ -71,6 +84,12 @@ angular.module("raceViewApp").factory "menu", ($location, $rootScope, simpleLogi
           show: 'auth'
         }
         {
+          name: "Cars"
+          id: "cars"
+          url: "/cars"
+          show: 'confinaleOnly'
+        }
+        {
           name: "Login"
           id: "login"
           url: "/login"
@@ -80,7 +99,7 @@ angular.module("raceViewApp").factory "menu", ($location, $rootScope, simpleLogi
           name: "Account"
           id: "account"
           url: "/account"
-          show: 'auth'
+          show: 'authAll'
         }
       ]
     }
@@ -110,9 +129,12 @@ angular.module("raceViewApp").factory "menu", ($location, $rootScope, simpleLogi
       self.currentPage is page
 
     showPage: (section, page) ->
+      console.log(displayType.$value) if page.show is 'auth'
       return true if !page.show
       return !isLoggedIn if page.show is 'noauth'
-      return isLoggedIn if page.show is 'auth'
+      return isLoggedIn && displayType.$value != 'simple' if page.show is 'auth'
+      return displayType.$value == 'simple' if page.show is 'simple'
+      return isLoggedIn if page.show is 'authAll'
       return isConfinale if page.show is 'confinaleOnly'
 
     isConfinale: () ->

@@ -1,0 +1,21 @@
+<md-content>
+    <div layout="vertical">
+        <h3 class="layout-title">Rounds</h3>
+
+        <table class="table table-hover">
+            <tr>
+                <th colspan="2">Car</th>
+                <th colspan="2">Time</th>
+            </tr>
+            <tr ng-repeat="r in rounds | orderBy:'timestamp':true">
+                <td style="text-align:right; font-size: x-large; font-family: monospace">{{r.car}}</td>
+                <td>
+                    <div ng-style="{'background-image': 'url(\'/images/cars/' + cars[r.car].image + '.png\')' }" class="car-pic"></div>
+                </td>
+                <td style="text-align:right; font-size: x-large; font-family: monospace">{{ (r.time/1000.0) | number : 3 }}s</td>
+                <td width="80%"></td>
+            </tr>
+        </table>
+
+    </div>
+</md-content>

@@ -2,18 +2,17 @@
     <h1>Welcome to Confinale Race View</h1>
 
     <div layout="vertical" layout-padding>
-        <div>
-            <md-button ng-show-auth class="md-button-raised" ng-click="menu.goto('/current')">Go to race overview
+        <div ng-repeat="section in menu.sections">
+
+            <md-button class="md-button-raised"
+                       ng-show="menu.showPage(section, page)"
+                       ng-repeat="page in section.pages"
+                       ng-class="{active: menu.isPageSelected(section, page)}"
+                       ng-click="menu.goto(page.url)"
+                       ink-ripple>
+                <span ng-bind="page | humanizeDoc"></span>
             </md-button>
-        </div>
-        <div>
-            <md-button ng-show-auth class="md-button-raised md-button-colored"
-                       ng-click="requestRaceParticipation(currentUser)" ng-show="canAddToRaceList(currentUser)">request
-                race
-                participation
-            </md-button>
-            <md-button ng-hide-auth ng-click="menu.goto('/login')" class="md-button-raised md-button-colored">LOGIN
-            </md-button>
+
         </div>
     </div>
 </md-content>

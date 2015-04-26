@@ -113,6 +113,11 @@ angular.module("raceViewApp").config([
     .when '/last-race',
       templateUrl: 'views/last-race.html'
       controller: 'CurrentCtrl'
+    .when '/plot',
+      templateUrl: 'views/plot.html'
+    .when '/rounds',
+      templateUrl: 'views/rounds.html'
+      controller: 'RoundsCtrl'
     .when '/last-quali',
       templateUrl: 'views/last-quali.html'
       controller: 'CurrentCtrl'

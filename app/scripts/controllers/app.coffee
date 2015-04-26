@@ -81,6 +81,7 @@ angular.module("raceViewApp").controller "AppCtrl", ($scope, $mdSidenav, $timeou
       , 500
 
 
+
   $scope.raceRequests = fbutil.syncArray('raceRequests')
   $scope.users = fbutil.syncObject('publicUsers')
   $scope.cars = fbutil.syncObject('cars')
